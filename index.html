@@ -1,47 +1,847 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Foodie - Online Food Ordering</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>FOODIE - Online Food Ordering</title>
+
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,sans-serif;background:#fff8f0;color:#333}
-header{background:orange;color:white;text-align:center;padding:35px 10px}
-header h1{margin:0;font-size:40px}header p{font-size:20px}
-nav{background:#333;text-align:center;padding:15px;position:sticky;top:0}
-nav a{color:white;text-decoration:none;margin:0 15px;font-size:17px}
-nav a:hover{color:orange}section{padding:40px 20px}
-h2{text-align:center;color:#e65100;margin-bottom:25px}
-.menu{display:flex;justify-content:center;gap:25px;flex-wrap:wrap}
-.food{background:white;width:280px;text-align:center;padding:15px;border-radius:12px;box-shadow:0 0 10px #ccc}
-.food img{width:100%;height:180px;object-fit:cover;border-radius:10px}
-.food h3{font-size:23px}.food p{font-size:16px}
-.price{color:green;font-size:22px!important;font-weight:bold}
-button{background:orange;color:white;border:none;padding:12px 25px;border-radius:6px;font-size:16px;cursor:pointer}
-button:hover{background:#e65100}.about{background:#fff;text-align:center}
-.about p{max-width:700px;margin:auto;font-size:18px;line-height:1.6}
-.contact{text-align:center}.contact p{font-size:18px}
-footer{background:#333;color:white;text-align:center;padding:20px}
-footer p{margin:5px}
-@media(max-width:600px){header h1{font-size:30px}nav a{margin:0 6px;font-size:14px}.food{width:90%}}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f7f7fb;
+  color:#222;
+}
+
+header{
+  background:#17172b;
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+
+.nav{
+  max-width:1100px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:bold;
+  color:#ff9f43;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:16px;
+  font-size:14px;
+}
+
+nav a:hover{
+  color:#ff9f43;
+}
+
+.hero{
+  background:linear-gradient(135deg,#ff9f43,#ff6b35);
+  color:white;
+  text-align:center;
+  padding:70px 20px;
+}
+
+.hero h1{
+  font-size:44px;
+  margin:0 0 12px;
+}
+
+.hero p{
+  font-size:18px;
+  margin:0 0 25px;
+}
+
+.btn{
+  display:inline-block;
+  background:#17172b;
+  color:#fff;
+  padding:12px 22px;
+  border:0;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:50px 20px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h2{
+  font-size:30px;
+  margin:0;
+  color:#17172b;
+}
+
+.title p{
+  color:#777;
+}
+
+.search{
+  max-width:650px;
+  margin:0 auto 25px;
+}
+
+.search input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:15px;
+}
+
+.categories{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-bottom:28px;
+}
+
+.cat{
+  padding:9px 15px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.cat.active,
+.cat:hover{
+  background:#ff9f43;
+  color:#fff;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 5px 18px #0001;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+}
+
+.food-img{
+  width:100%;
+  height:155px;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:15px;
+}
+
+.card h3{
+  margin:0 0 7px;
+}
+
+.card p{
+  font-size:13px;
+  color:#777;
+  min-height:35px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:12px;
+}
+
+.price{
+  font-weight:bold;
+  color:#159957;
+}
+
+.add{
+  background:#ff9f43;
+  color:#fff;
+  border:0;
+  border-radius:7px;
+  padding:9px 13px;
+  cursor:pointer;
+}
+
+.about,
+.contact{
+  background:#fff;
+  border-radius:14px;
+  padding:28px;
+  line-height:1.8;
+  box-shadow:0 5px 18px #0001;
+}
+
+.cart{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  background:#17172b;
+  color:#fff;
+  border:0;
+  border-radius:30px;
+  padding:14px 20px;
+  z-index:10;
+  cursor:pointer;
+}
+
+.badge{
+  background:#ff9f43;
+  border-radius:50%;
+  padding:2px 7px;
+  margin-left:5px;
+}
+
+footer{
+  background:#17172b;
+  color:#fff;
+  text-align:center;
+  padding:24px;
+}
+
+@media(max-width:850px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:520px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  nav a{
+    margin-left:7px;
+    font-size:12px;
+  }
+
+  .logo{
+    font-size:21px;
+  }
+}
 </style>
 </head>
-<body>
-<header id="home"><h1>🍔 FOODIE</h1><p>Delicious Food at Your Door</p></header>
-<nav><a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-<section id="menu">
-<h2>🍽️ Our Menu</h2>
-<div class="menu">
-<div class="food"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" alt="Pizza"><h3>🍕 Pizza</h3><p>Delicious cheesy pizza with fresh toppings.</p><p class="price">₹199</p><button onclick="order('Pizza')">Order Now</button></div>
-<div class="food"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="Burger"><h3>🍔 Burger</h3><p>Fresh and tasty burger with crispy vegetables.</p><p class="price">₹99</p><button onclick="order('Burger')">Order Now</button></div>
-<div class="food"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877" alt="French Fries"><h3>🍟 French Fries</h3><p>Crispy and delicious golden French fries.</p><p class="price">₹79</p><button onclick="order('French Fries')">Order Now</button></div>
-</div></section>
-<section id="about" class="about"><h2>📖 About Us</h2><p>Welcome to Foodie! Foodie is a simple online food ordering website where customers can choose their favourite food easily. We provide delicious food at affordable prices with a simple ordering process.</p></section>
-<section id="contact" class="contact"><h2>📞 Contact Us</h2><p>📱 Phone: 9876543210</p><p>📧 Email: foodie@gmail.com</p><p>📍 Location: Tamil Nadu, India</p></section>
-<footer><p>🍔 FOODIE</p><p>© 2026 Foodie. All Rights Reserved.</p></footer>
-<script>
-function order(foodName){alert("Order placed successfully! 🎉
 
-Food: "+foodName);}
+<body>
+
+<header>
+<div class="nav">
+
+<div class="logo">
+🍔 FOODIE
+</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#menu">Menu</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+
+</div>
+</header>
+
+<section class="hero" id="home">
+
+<h1>
+Delicious Food at Your Door
+</h1>
+
+<p>
+Fresh • Tasty • Affordable
+</p>
+
+<a class="btn" href="#menu">
+Order Now 🍕
+</a>
+
+</section>
+
+<section id="menu">
+
+<div class="title">
+
+<h2>
+Our Menu
+</h2>
+
+<p>
+Choose your favourite food and add it to your cart.
+</p>
+
+</div>
+
+<div class="search">
+
+<input
+id="search"
+placeholder="🔍 Search food..."
+>
+
+</div>
+
+<div class="categories">
+
+<button class="cat active" data-c="all">
+All
+</button>
+
+<button class="cat" data-c="pizza">
+🍕 Pizza
+</button>
+
+<button class="cat" data-c="burger">
+🍔 Burger
+</button>
+
+<button class="cat" data-c="indian">
+🍛 Indian
+</button>
+
+<button class="cat" data-c="drinks">
+🥤 Drinks
+</button>
+
+<button class="cat" data-c="dessert">
+🍰 Dessert
+</button>
+
+</div>
+
+<div class="grid" id="grid"></div>
+
+</section>
+<section id="about">
+
+<div class="title">
+<h2>About Us</h2>
+</div>
+
+<div class="about">
+
+<b>FOODIE</b> is a simple online food ordering website
+created for a college project.
+
+Browse the menu, add your favourite dishes to the cart
+and place your order easily. 🍔🍕🥤
+
+</div>
+
+</section>
+
+
+<section id="contact">
+
+<div class="title">
+<h2>Contact Us</h2>
+</div>
+
+<div class="contact">
+
+📞 <b>Phone:</b> 9876543210
+<br>
+
+📧 <b>Email:</b> foodie@gmail.com
+<br>
+
+📍 <b>Location:</b> Tamil Nadu, India
+
+</div>
+
+</section>
+
+
+<button class="cart" onclick="openCart()">
+
+🛒 Cart
+
+<span class="badge" id="count">0</span>
+
+</button>
+
+
+<div class="modal" id="cartModal">
+
+<div class="box">
+
+<button class="close" onclick="closeCart()">×</button>
+
+<h2>🛒 Your Cart</h2>
+
+<div id="items"></div>
+
+<div class="total">
+
+Total: ₹<span id="total">0</span>
+
+</div>
+
+<button
+class="btn"
+onclick="checkout()"
+style="width:100%"
+>
+
+Proceed to Order
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="modal" id="orderModal">
+
+<div class="box">
+
+<button class="close" onclick="closeOrder()">×</button>
+
+<h2>🧾 Order Details</h2>
+
+<form class="form" onsubmit="place(event)">
+
+<input
+id="name"
+required
+placeholder="Your Name"
+>
+
+<input
+id="phone"
+required
+type="tel"
+placeholder="Phone Number"
+>
+
+<textarea
+id="address"
+required
+placeholder="Delivery Address"
+></textarea>
+
+<select id="pay" required>
+
+<option value="">
+Select Payment
+</option>
+
+<option>
+Cash on Delivery
+</option>
+
+<option>
+UPI
+</option>
+
+</select>
+
+<button
+class="btn"
+style="width:100%"
+>
+
+Place Order 🍔
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<footer>
+
+🍔 FOODIE
+
+<br>
+
+© 2026 FOODIE. All Rights Reserved.
+
+</footer>
+
+
+<script>
+
+const foods = [
+
+[
+"Margherita Pizza",
+"pizza",
+199,
+"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=700&q=80",
+"Cheesy pizza with fresh toppings."
+],
+
+[
+"Cheese Burger",
+"burger",
+99,
+"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80",
+"Juicy burger with cheese and veggies."
+],
+
+[
+"French Fries",
+"burger",
+79,
+"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=80",
+"Crispy golden French fries."
+],
+
+[
+"Chicken Biryani",
+"indian",
+179,
+"https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=700&q=80",
+"Aromatic Indian biryani."
+],
+
+[
+"Masala Dosa",
+"indian",
+80,
+"https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=700&q=80",
+"Crispy dosa with chutney."
+],
+
+[
+"Paneer Pizza",
+"pizza",
+229,
+"https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=700&q=80",
+"Pizza loaded with spicy paneer."
+],
+
+[
+"Cold Coffee",
+"drinks",
+89,
+"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80",
+"Chilled creamy coffee."
+],
+
+[
+"Fresh Lime Juice",
+"drinks",
+59,
+"https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=700&q=80",
+"Refreshing lime drink."
+],
+
+[
+"Chocolate Cake",
+"dessert",
+129,
+"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80",
+"Rich chocolate cake."
+],
+
+[
+"Ice Cream",
+"dessert",
+99,
+"https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=700&q=80",
+"Creamy ice cream."
+]
+
+];
+
+let cart = [];
+
+let cat = "all";
+
+function render(){
+
+let q =
+document.getElementById("search")
+.value
+.toLowerCase();
+
+let a = foods.filter(f =>
+
+(cat == "all" || f[1] == cat)
+
+&&
+
+f[0].toLowerCase().includes(q)
+
+);
+
+document.getElementById("grid").innerHTML =
+
+a.length ?
+
+a.map(f => `
+
+<div class="card">
+
+<img
+class="food-img"
+src="${f[3]}"
+alt="${f[0]}"
+>
+
+<div class="card-body">
+
+<h3>${f[0]}</h3>
+
+<p>${f[4]}</p>
+
+<div class="row">
+
+<span class="price">
+₹${f[2]}
+</span>
+
+<button
+class="add"
+onclick="add('${f[0]}')"
+>
+
+Add +
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("")
+
+:
+
+"<p>No food found 😔</p>";
+
+}
+
+
+function add(n){
+
+let x = cart.find(i => i.n == n);
+
+if(x)
+
+x.q++;
+
+else
+
+cart.push({
+
+n:n,
+
+q:1,
+
+p:foods.find(f => f[0] == n)[2]
+
+});
+
+update();
+
+}
+
+
+function update(){
+
+document.getElementById("count")
+.textContent =
+cart.reduce((s,x) => s+x.q,0);
+
+document.getElementById("items")
+.innerHTML =
+
+cart.length ?
+
+cart.map(x => `
+
+<div class="item">
+
+<b>${x.n}</b>
+
+<span>
+
+₹${x.p*x.q}
+
+<br>
+
+<button onclick="change('${x.n}',-1)">
+−
+</button>
+
+${x.q}
+
+<button onclick="change('${x.n}',1)">
++
+</button>
+
+</span>
+
+</div>
+
+`).join("")
+
+:
+
+"<p>Your cart is empty.</p>";
+
+document.getElementById("total")
+.textContent =
+cart.reduce((s,x) => s+x.p*x.q,0);
+
+}
+
+
+function change(n,d){
+
+let x = cart.find(i => i.n == n);
+
+x.q += d;
+
+if(x.q < 1)
+
+cart = cart.filter(i => i.n != n);
+
+update();
+
+}
+
+
+function openCart(){
+
+update();
+
+document.getElementById("cartModal")
+.style.display = "flex";
+
+}
+
+
+function closeCart(){
+
+document.getElementById("cartModal")
+.style.display = "none";
+
+}
+
+
+function checkout(){
+
+if(!cart.length){
+
+alert("Your cart is empty!");
+
+return;
+
+}
+
+closeCart();
+
+document.getElementById("orderModal")
+.style.display = "flex";
+
+}
+
+
+function closeOrder(){
+
+document.getElementById("orderModal")
+.style.display = "none";
+
+}
+
+
+function place(e){
+
+e.preventDefault();
+
+alert(
+"🎉 Order placed successfully!\nThank you for ordering from FOODIE!"
+);
+
+cart = [];
+
+update();
+
+closeOrder();
+
+e.target.reset();
+
+}
+
+
+document.getElementById("search")
+.oninput = render;
+
+
+document.querySelectorAll(".cat")
+.forEach(b =>
+
+b.onclick = () => {
+
+document.querySelectorAll(".cat")
+.forEach(x =>
+x.classList.remove("active")
+);
+
+b.classList.add("active");
+
+cat = b.dataset.c;
+
+render();
+
+}
+
+);
+
+
+render();
+
 </script>
+
 </body>
-</html>
+  </html>
